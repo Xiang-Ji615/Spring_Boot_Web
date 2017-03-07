@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:s="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.1.xsd
+	">
+
+	<s:http auto-config="true" authentication-manager-ref="generalManager">
+		<s:intercept-url pattern="/Rest/**" access="hasRole('ROLE_USER')" />
+		<s:form-login login-page="/Web/Login" password-parameter="username"
+			username-parameter="password" authentication-failure-url="/Web/Login?error"
+			login-processing-url="/Web/Login/j_spring_security_check"
+			authentication-success-handler-ref="savedRequestAwareAuthenticationSuccessHandler" />
+		<s:logout logout-success-url="/Web/Login?msg" logout-url="/Web/Logout" />
+		<s:csrf />
+
+		<s:remember-me token-validity-seconds="1209600"
+			remember-me-parameter="remember-me" data-source-ref="dataSource" />
+	</s:http>
+
+	<s:authentication-manager id="generalManager">
+		<s:authentication-provider>
+			<s:user-service>
+				<s:user name="admin" password="admin" authorities="ROLE_USER" />
+			</s:user-service>
+		</s:authentication-provider>
+	</s:authentication-manager>
+
+
+
+
+
+
+</beans>
