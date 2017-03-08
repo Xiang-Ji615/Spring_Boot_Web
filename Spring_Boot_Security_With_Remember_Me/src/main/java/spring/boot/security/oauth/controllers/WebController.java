@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import main.java.spring.boot.security.oauth.viewmodels.ViewModelIndex;
 
@@ -82,6 +83,11 @@ public class WebController {
                              :session.getAttribute("targetUrl").toString();
 		}
 		return targetUrl;
+	}
+	
+	@RequestMapping(value="GetPDF", method=RequestMethod.GET, produces=MediaType.ALL_VALUE)
+	public Object downloadPDF(){
+		return new ModelAndView("pdfView");
 	}
 
 }

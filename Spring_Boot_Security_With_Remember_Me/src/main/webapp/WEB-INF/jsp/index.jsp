@@ -52,7 +52,10 @@
                         <a href="/Rest/Test">API</a>
                     </li>
                     <c:if test="${not empty loggedUser}">
-                    <li class="page-scroll">
+					<li class="page-scroll">
+                       <a href="/Web/GetPDF">Sampel PDF</a>
+                    </li>
+                     <li class="page-scroll">
                        <a href="javascript:formSubmit()">Hello ${loggedUser} Logout</a>
                     </li>
                     </c:if>
