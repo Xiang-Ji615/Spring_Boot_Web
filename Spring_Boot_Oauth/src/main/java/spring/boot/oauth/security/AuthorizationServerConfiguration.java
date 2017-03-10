@@ -39,6 +39,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 		.withClient("jj")
 		.secret("test")
 		.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+		.authorities("ADMIN")
 		.scopes("read", "write")
 		.accessTokenValiditySeconds(120)
 		.refreshTokenValiditySeconds(600);
@@ -48,7 +49,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
 				.authenticationManager(authenticationManager);
-	}
+		}
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {

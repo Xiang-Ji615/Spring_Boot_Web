@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 @Configuration
 @EnableWebSecurity
 public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private DriverManagerDataSource dataSource;
 
@@ -35,7 +35,8 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().anonymous().disable().authorizeRequests().antMatchers("/oauth/token").permitAll();
+		http.csrf().disable().anonymous().disable().authorizeRequests().antMatchers("/oauth/token").permitAll()
+		.and().formLogin().permitAll();
 	}
 
 	@Override
