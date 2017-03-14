@@ -94,6 +94,19 @@
 			<version>5.5.10</version>
 		</dependency>
 
+		<dependency>
+			<groupId>net.sf.jt400</groupId>
+			<artifactId>jt400</artifactId>
+			<version>9.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+
+
 
 	</dependencies>
 	<build>
