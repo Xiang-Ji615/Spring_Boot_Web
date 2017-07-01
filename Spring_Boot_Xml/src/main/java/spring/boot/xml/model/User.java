@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
-public class User implements Serializable {
+public class User {
 
 	@XmlAttribute
 	private Integer id;
