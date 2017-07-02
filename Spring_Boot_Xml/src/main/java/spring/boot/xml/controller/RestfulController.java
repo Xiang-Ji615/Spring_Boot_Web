@@ -3,6 +3,7 @@ package main.java.spring.boot.xml.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,4 +27,5 @@ public class RestfulController {
 		System.out.println("User api works");
 		return ResponseEntity.ok(new User(1, "JJ", "P@ssw0rd"));
 	}
+	
 }
