@@ -52,7 +52,14 @@ public class RestfulController {
 	public ResponseEntity<?> asyncTest() throws InterruptedException, ExecutionException{
 		System.out.println("Start: "+Thread.currentThread().getId());
 		Future<String> future = asyncService.calculateAsync();
-		String ret = future.get();
+		Future<String> future2 = asyncService.calculateAsync2();
+		String ret = "";
+		while(true){
+			if(future.isDone() && future2.isDone()){
+				ret = future.get() + future2.get();
+				break;
+			}
+		}
 		System.out.println("End: "+Thread.currentThread().getId());
 		return ResponseEntity.ok(ret);
 	}
