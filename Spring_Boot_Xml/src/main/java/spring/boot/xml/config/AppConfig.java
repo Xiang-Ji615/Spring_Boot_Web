@@ -7,11 +7,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @Configuration
 @ComponentScan(basePackages = { "main.java" })
 @EnableAsync
+@EnableScheduling
 public class AppConfig implements AsyncConfigurer {
 
 	@Override

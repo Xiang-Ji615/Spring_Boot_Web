@@ -1,13 +1,20 @@
 package main.java.spring.boot.xml.controller;
 
+import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import main.java.spring.boot.xml.model.User;
 import main.java.spring.boot.xml.service.AsyncService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "Rest")
 public class RestfulController {
@@ -49,7 +57,8 @@ public class RestfulController {
 	}
 	
 	@RequestMapping(value="Async", method=RequestMethod.GET, produces=MediaType.ALL_VALUE)
-	public ResponseEntity<?> asyncTest() throws InterruptedException, ExecutionException{
+	public ResponseEntity<?> asyncTest(HttpServletRequest request) throws InterruptedException, ExecutionException{
+		HttpSession session = request.getSession();
 		System.out.println("Start: "+Thread.currentThread().getId());
 		Future<String> future = asyncService.calculateAsync();
 		Future<String> future2 = asyncService.calculateAsync2();
@@ -59,9 +68,13 @@ public class RestfulController {
 				ret = future.get() + future2.get();
 				break;
 			}
+			System.out.println(new Date());
+			Thread.sleep(1000);
+
 		}
 		System.out.println("End: "+Thread.currentThread().getId());
 		return ResponseEntity.ok(ret);
 	}
+	
 
 }
