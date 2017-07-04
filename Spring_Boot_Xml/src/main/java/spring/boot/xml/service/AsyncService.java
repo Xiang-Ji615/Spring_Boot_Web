@@ -3,10 +3,14 @@ package main.java.spring.boot.xml.service;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
+@Lazy
 public class AsyncService {
 	
 	@Async
@@ -65,6 +69,11 @@ public class AsyncService {
 		return " World";
 	}
 	
+	
+	@PostConstruct
+	public void postConstruct(){
+		System.out.println("Async services initialized");
+	}
 
 }
 

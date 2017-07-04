@@ -8,8 +8,11 @@ import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.java.spring.boot.xml.meta.JJResource;
 import main.java.spring.boot.xml.model.User;
 import main.java.spring.boot.xml.service.AsyncService;
 
@@ -29,7 +33,11 @@ import main.java.spring.boot.xml.service.AsyncService;
 public class RestfulController {
 	
 	@Autowired
+	@Lazy
 	AsyncService asyncService;
+	
+	@Value(value="${jj.test.value}")
+	String jjValue;
 
 	@RequestMapping(value = "Test", method = RequestMethod.GET, produces = MediaType.ALL_VALUE)
 	public Callable<ResponseEntity<?>> test() throws InterruptedException {
@@ -74,6 +82,12 @@ public class RestfulController {
 		}
 		System.out.println("End: "+Thread.currentThread().getId());
 		return ResponseEntity.ok(ret);
+	}
+	
+	
+	@RequestMapping(value="JJTest", method=RequestMethod.GET, produces=MediaType.ALL_VALUE)
+	public ResponseEntity<?> jjProfileTest(){
+		return ResponseEntity.ok(jjValue);
 	}
 	
 
