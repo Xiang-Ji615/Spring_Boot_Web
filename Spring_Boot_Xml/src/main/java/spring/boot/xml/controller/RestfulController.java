@@ -12,6 +12,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.java.spring.boot.xml.event.JJEvent;
 import main.java.spring.boot.xml.meta.JJResource;
 import main.java.spring.boot.xml.model.User;
 import main.java.spring.boot.xml.service.AsyncService;
@@ -30,7 +33,9 @@ import main.java.spring.boot.xml.service.AsyncService;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "Rest")
-public class RestfulController {
+public class RestfulController implements ApplicationEventPublisherAware{
+	
+	private ApplicationEventPublisher publisher;
 	
 	@Autowired
 	@Lazy
@@ -87,7 +92,16 @@ public class RestfulController {
 	
 	@RequestMapping(value="JJTest", method=RequestMethod.GET, produces=MediaType.ALL_VALUE)
 	public ResponseEntity<?> jjProfileTest(){
+		JJEvent jjEvent = new JJEvent(this, "JJ", 31);
+		publisher.publishEvent(jjEvent);
 		return ResponseEntity.ok(jjValue);
+	}
+
+
+	@Override
+	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+		// TODO Auto-generated method stub
+		this.publisher =applicationEventPublisher;
 	}
 	
 
