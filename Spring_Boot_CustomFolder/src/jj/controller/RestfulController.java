@@ -37,6 +37,7 @@ public class RestfulController {
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
+		System.out.println("Init bindder triggered");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, "dob", new CustomDateEditor(dateFormat, true));

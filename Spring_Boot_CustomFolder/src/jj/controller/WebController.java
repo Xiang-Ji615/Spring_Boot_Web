@@ -27,6 +27,7 @@ public class WebController {
 	
 	@ModelAttribute
 	public void addTime(ModelMap map) {
+		System.out.println("Model attribute triggered!!!!");
 		map.addAttribute("time", new Date());
 	}
 	
