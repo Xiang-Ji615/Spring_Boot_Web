@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.datetime.DateFormatter;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -44,5 +45,10 @@ public class RestfulController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 //		binder.addCustomFormatter(new DateFormatter("dd/MM/yyyy"));
 //		System.out.println("Init Binder runs");
+	}
+	
+	@Scheduled(cron="0/5 * * * * ?")
+	public void scheduleJob() {
+		System.out.println("This is a sample schedule job!!! " + new Date());
 	}
 }
